@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { ToastController } from '@ionic/angular';
+import { ToastController, Platform } from '@ionic/angular';
+import { HistorialService } from '../services/historial.service';
 
 @Component({
   selector: 'app-tab1',
@@ -10,14 +11,28 @@ import { ToastController } from '@ionic/angular';
 export class Tab1Page {
   constructor(
     private barcodeScanner: BarcodeScanner,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private platform: Platform,
+    private historialService: HistorialService
   ) {}
 
   public scan() {
+    console.log('Realizando Scan...');
+
+    if (!this.platform.is('cordova')) {
+      this.historialService.agregarHistorial('http://google.com');
+      return;
+    }
     this.barcodeScanner
       .scan()
       .then((barcodeData) => {
-        console.log('Barcode data', barcodeData);
+        console.log('Barcode Result', barcodeData.text);
+        console.log('Barcode Format', barcodeData.format);
+        console.log('Barcode Cancelled', barcodeData.cancelled);
+
+        if (barcodeData.cancelled === false && barcodeData.text) {
+          this.historialService.agregarHistorial(barcodeData.text);
+        }
       })
       .catch((err) => {
         console.log('Error', err);
