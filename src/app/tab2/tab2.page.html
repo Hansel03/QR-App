@@ -9,9 +9,14 @@
 <ion-content [fullscreen]="true">
     <ion-header collapse="condense">
         <ion-toolbar>
-            <ion-title size="large">Tab 2</ion-title>
+            <ion-title size="large">Historial</ion-title>
         </ion-toolbar>
     </ion-header>
 
-    <h1>tabs 2</h1>
+    <ion-list *ngFor="let data of historial; let i = index">
+        <ion-item (click)="abrirScan(i)" color="primary">
+            <ion-label>{{data.info}}</ion-label>
+            <ion-label>{{data.tipo}}</ion-label>
+        </ion-item>
+    </ion-list>
 </ion-content>
