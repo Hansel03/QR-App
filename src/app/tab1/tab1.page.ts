@@ -16,11 +16,17 @@ export class Tab1Page {
     private historialService: HistorialService
   ) {}
 
-  public scan() {
+  public async scan() {
     console.log('Realizando Scan...');
 
     if (!this.platform.is('cordova')) {
-      this.historialService.agregarHistorial('http://google.com');
+      // prueba con url
+      // this.historialService.agregarHistorial('http://google.com');
+      // prueba con mapas
+
+      this.historialService.agregarHistorial(
+        'geo: 40.725273799136296, -74.18172255000003'
+      );
       return;
     }
     this.barcodeScanner

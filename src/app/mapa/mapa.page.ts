@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MapsAPILoader } from '@agm/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-mapa',
@@ -7,14 +7,26 @@ import { MapsAPILoader } from '@agm/core';
   styleUrls: ['./mapa.page.scss'],
 })
 export class MapaPage implements OnInit {
+  @Input() coords: string;
   latitude: number;
   longitude: number;
   zoom: number;
-  constructor(private mapsAPILoader: MapsAPILoader) {
-    this.latitude = 10.871708082082758;
-    this.longitude = -74.77905641457221;
+  coordsArray: any[] = [];
+  constructor(public modalController: ModalController) {
     this.zoom = 18;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.coordsArray = this.coords.split(',');
+    this.latitude = +this.coordsArray[0].replace('geo: ', '');
+    this.longitude = +this.coordsArray[1].replace(' ', '');
+  }
+
+  public close() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalController.dismiss({
+      dismissed: true,
+    });
+  }
 }

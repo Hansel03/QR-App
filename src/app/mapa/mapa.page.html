@@ -1,6 +1,8 @@
 <!-- <ion-header>
   <ion-toolbar>
-    <ion-title>mapa</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header> -->
 
@@ -10,3 +12,10 @@
         </agm-marker>
     </agm-map>
 </ion-content>
+
+<!-- Footer without a border -->
+<ion-footer class="ion-no-border">
+    <ion-toolbar color="primary">
+        <ion-button (click)="close()" slot="end" color="danger">Cerrar</ion-button>
+    </ion-toolbar>
+</ion-footer>
