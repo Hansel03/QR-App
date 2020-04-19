@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-mapa',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mapa.page.scss'],
 })
 export class MapaPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  constructor(private mapsAPILoader: MapsAPILoader) {
+    this.latitude = 10.871708082082758;
+    this.longitude = -74.77905641457221;
+    this.zoom = 18;
   }
 
+  ngOnInit() {}
 }

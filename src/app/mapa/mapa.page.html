@@ -1,9 +1,12 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>mapa</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
-
+    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+        <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="false">
+        </agm-marker>
+    </agm-map>
 </ion-content>

@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { MapaPageRoutingModule } from './mapa-routing.module';
 
 import { MapaPage } from './mapa.page';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MapaPageRoutingModule
+    MapaPageRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAVDy2m1GWE7nHQJl1MdGLVlkZ6znEd4gY',
+    }),
   ],
-  declarations: [MapaPage]
+  declarations: [MapaPage],
 })
 export class MapaPageModule {}
