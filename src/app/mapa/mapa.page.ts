@@ -13,13 +13,13 @@ export class MapaPage implements OnInit {
   zoom: number;
   coordsArray: any[] = [];
   constructor(public modalController: ModalController) {
-    this.zoom = 18;
+    this.zoom = 98;
   }
 
   ngOnInit() {
     this.coordsArray = this.coords.split(',');
-    this.latitude = +this.coordsArray[0].replace('geo: ', '');
-    this.longitude = +this.coordsArray[1].replace(' ', '');
+    this.latitude = +this.coordsArray[0].replace('geo:', '');
+    this.longitude = +this.coordsArray[1];
   }
 
   public close() {
