@@ -13,6 +13,12 @@ import { MapaPageModule } from '../app/mapa/mapa.module';
 
 // plugins
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import {
+  Contacts,
+  Contact,
+  ContactField,
+  ContactName,
+} from '@ionic-native/contacts/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +34,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     InAppBrowser,
+    // tslint:disable-next-line: deprecation
+    Contacts,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ScanData } from '../models/scan-data.model';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform, ToastController } from '@ionic/angular';
 import { MapaPage } from '../mapa/mapa.page';
+import {
+  Contacts,
+  Contact,
+  ContactField,
+  ContactName,
+} from '@ionic-native/contacts/ngx';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +18,11 @@ export class HistorialService {
 
   constructor(
     private iab: InAppBrowser,
-    public modalController: ModalController
+    public modalController: ModalController,
+    // tslint:disable-next-line: deprecation
+    private contacts: Contacts,
+    private platform: Platform,
+    private toastController: ToastController
   ) {
     this.historial = [];
   }
@@ -57,7 +67,30 @@ export class HistorialService {
 
   private crearContacto(texto: string) {
     const campos: any = this.parse_vcard(texto);
-    console.log(campos);
+
+    const nombre = campos.fn;
+    const tel = campos.tel[0].value[0];
+
+    if (!this.platform.is('cordova')) {
+      console.warn('Estoy en la computadora, no puedo crear contacto');
+      return;
+    }
+
+    const contact: Contact = this.contacts.create();
+    contact.name = new ContactName(null, nombre);
+    contact.phoneNumbers = [new ContactField('mobile', tel)];
+    contact.save().then(
+      () => this.crearToast('Contacto ' + nombre + ' creado!'),
+      (error: any) => this.crearToast('Error: ' + error)
+    );
+  }
+
+  private async crearToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000,
+    });
+    toast.present();
   }
 
   private parse_vcard(input: string) {
