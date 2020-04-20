@@ -24,9 +24,20 @@ export class Tab1Page {
       // this.historialService.agregarHistorial('http://google.com');
       // prueba con mapas
 
-      this.historialService.agregarHistorial(
-        'geo: 40.725273799136296, -74.18172255000003'
-      );
+      // this.historialService.agregarHistorial(
+      //   'geo: 40.725273799136296, -74.18172255000003'
+      // );
+
+      this.historialService.agregarHistorial(`BEGIN:VCARD
+VERSION:2.1
+N:Kent;Clark
+FN:Clark Kent
+ORG:
+TEL;HOME;VOICE:12345
+TEL;TYPE=cell:67890
+ADR;TYPE=work:;;;
+EMAIL:clark@superman.com
+END:VCARD`);
       return;
     }
     this.barcodeScanner
